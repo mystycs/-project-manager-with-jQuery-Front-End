@@ -1,6 +1,6 @@
 ## Project-Manager
 
-A Ruby on Rails framework driven app which is designed to manage projects and tasks.
+A Ruby on Rails framework driven app with a jQuery Front End which is designed to manage projects and tasks.
 
 ## Running Locally
 
