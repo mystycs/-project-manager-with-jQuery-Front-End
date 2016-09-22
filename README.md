@@ -5,7 +5,7 @@ A Ruby on Rails framework driven app with a jQuery Front End which is designed t
 ## Running Locally
 
 ```  
-git clone git@github.com:mystycs/project-manager.git # or clone your own fork
+git clone git@github.com:mystycs/project-manager-with-jQuery-Front-End.git # or clone your own fork
 cd project-manager
 bundle install
 rake db:migrate
