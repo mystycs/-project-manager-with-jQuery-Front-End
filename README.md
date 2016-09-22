@@ -13,7 +13,7 @@ rake db:migrate
 
 ## Contribute
 
-All and any kind of contributions are always welcome!
+All and any kinds of contributions are always welcome!
 
 ## License
 
