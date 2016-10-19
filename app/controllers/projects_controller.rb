@@ -33,21 +33,49 @@ class ProjectsController < ApplicationController
 
   def show
     # @project = Project.find(params[:id])
+
+
+    # @project = Project.find(params[:id])
+    #
+    # respond_to do |f|
+    #       f.html { render :show }
+    #       f.json { render json: @project }
+    # end
+
+
     if params[:category_id]
       @category = Category.find_by(id: params[:category_id])
-      @project = @category.projects.find_by(id: params[:id])
+
+      @project =  @category.projects.find_by(id: params[:id])
+
+      @user = User.find(@project.user_id).full_name
+      @comment = Comment.new
+      @comments = Comment.filter_comments(@project.id)
+      @task = Task.new
+      @tasks = Task.filter_tasks(@project.id)
+
+
       if @project.nil?
         redirect_to category_projects(@project), alert: 'Project not found'
       end
-    else
-      @project = Project.find(params[:id])
+      else
+        @project = Project.find(params[:id])
+      end
+
+    response = { #project: @project, tasks: @tasks, comments: @comments, user: @user
+                  project: [@project, { tasks: @tasks} , {comments:  @comments}, user: @user] }
+
+    respond_to do |format|
+          format.html { render :show }
+          format.json { render json: response}
     end
 
-    @user = User.find(@project.user_id).full_name
-    @comment = Comment.new
-    @comments = Comment.filter_comments(@project.id)
-    @task = Task.new
-    @tasks = Task.filter_tasks(@project.id)
+    # respond_to do |format|
+    #       format.html { render :show }
+    #       format.json { render json: @project.to_json(include  {tasks: @tasks})}
+    # end
+
+
   end
 
   def index

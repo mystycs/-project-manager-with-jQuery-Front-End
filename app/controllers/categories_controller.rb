@@ -6,8 +6,14 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find(params[:id])
     @project = Project.new
+
+    #@category = Category.find(params[:id])
+    @category = Category.find(params[:id])
+      respond_to do |format|
+        format.html { render :show }
+        format.json { render json: @category}
+      end
   end
 
   def index
