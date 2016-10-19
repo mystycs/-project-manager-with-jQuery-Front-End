@@ -63,7 +63,7 @@ class ProjectsController < ApplicationController
       end
 
     response = { #project: @project, tasks: @tasks, comments: @comments, user: @user
-                  project: [@project, { tasks: @tasks} , {comments:  @comments}, user: @user] }
+                  project: [@project,  tasks: @tasks , comments:  @comments, user: @user] }
 
     respond_to do |format|
           format.html { render :show }
