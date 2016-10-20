@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
   root 'project_manager#index', as: 'project_manager'
+  resources :project_manager, defaults: { format: :json }
 
   #get 'categories/projects/new' => 'projects#new'
   #match 'categories/projects/new',     :to => 'projects#new', :as => :project_new
@@ -12,6 +13,8 @@ Rails.application.routes.draw do
   resources :categories do
     resources :projects
   end
+
+  resources :projects
 
   #resources :projects
   resources :comments
