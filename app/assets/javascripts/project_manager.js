@@ -1,11 +1,16 @@
 $(function () {
-  $.getJSON("http://104.236.196.127:9306/project_manager",
+  $.getJSON("/project_manager",
         function(data){
-          $.each(data, function(i,project){
-            content = '<h2><a href="/categories/' + project.id + '"</a>' + project.title + '</h2>';
-            content += '<li>'
-            //content += '<a href="/categories/' + project.projects.id + '"</a>' ;
-            content += '</li>'
+          $.each(data, function(i,cat){
+            content = '<h2><a href="/categories/' + cat.id + '"</a>' + cat.title + '</h2>';
+            content += '<ul>'
+            $.each(cat.projects, function(j, proj) {
+              content += '<li>';
+              content +=  '<a href="/categories/' + cat.id + '/projects/' + proj.id +'">' + proj.title + '</a>';
+              content +=  '<ol>' + proj.description + '</ol>';
+              content += '</li>';
+                });
+            content += '</ul>'
             $(content).appendTo("#project-data");
           });
         });
