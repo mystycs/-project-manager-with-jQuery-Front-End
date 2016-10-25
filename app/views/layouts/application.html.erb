@@ -15,6 +15,7 @@
       <%= content_tag(:div, flash[:error], :class => "alert alert-warning") if flash[:error] %>
       <%= content_tag(:div, flash[:notice], :class => "alert alert-success") if flash[:notice] %>
       <%= content_tag(:div, flash[:alert], :class => "alert alert-danger") if flash[:alert] %>
+      <div id="printAlert"></div>
       <div class="col-md-1"></div>
       <div class="col-md-10">
         <div class="jumbotron"><%= yield %>

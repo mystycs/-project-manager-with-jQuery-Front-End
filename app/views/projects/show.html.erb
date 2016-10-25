@@ -23,7 +23,7 @@ test -->
 
 
 <h4>Tasks:</h4>
-<% @tasks.each_with_index do |task, index| %>
+<!-- <% @tasks.each_with_index do |task, index| %>
   <%= index+1 %>: <%= task.task %> <% if current_user.present? %> -
     <% if task.completed != true %>
       <%= link_to "Mark Completed", {:controller => "tasks", :action => "completed", :id => task.id, :category_id => @category.id, :project_id => @project.id} %>
@@ -32,7 +32,10 @@ test -->
     <% end %>
   <% end %>
   <br><br>
-<% end %>
+<% end %> -->
+
+<div id="showTasks">
+</div><br>
 
 <% if current_user.present? %>
 <h4> Add a Task: </h4>
