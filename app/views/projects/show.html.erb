@@ -1,18 +1,20 @@
 <% content_for :javascript_includes do %>
   <%= javascript_include_tag "projects.js" %>
 <% end %>
-
-<div id="title">
+<div id="project-content">
 </div>
+<!-- <div id="title">
+</div> -->
 <!-- <h2>Project: <%= @project.title %></h2> -->
 <% if current_user.present? && current_user.id == @project.user_id %>
-  <%= link_to 'Delete Project', category_project_path(@category.id, @project.id), :method => :delete %>
+  <!-- <%= link_to 'Delete Project', category_project_path(@category.id, @project.id), :method => :delete %> -->
+  <%=   link_to 'Delete Project', '#', :onclick => 'deleteProject()' %>
 <% end %>
-<div id="description">
-</div>
+<!-- <div id="description">
+</div> -->
 <!-- <h3>Description: <%= @project.description %></h3> -->
-<div id="postedBy">
-</div><br>
+<!-- <div id="postedBy">
+</div><br> -->
 <!-- Posted By: <%= @user %><br><br> -->
 
 <h4>Tasks:</h4>
