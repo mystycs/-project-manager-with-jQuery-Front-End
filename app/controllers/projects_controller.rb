@@ -60,7 +60,7 @@ class ProjectsController < ApplicationController
       end
 
     response = { # project: @project, tasks: @tasks, comments: @comments, user: @user
-      project: @project, tasks: @tasks, comments:  @comments, user: @user
+      project: @project, tasks: @tasks, comments:  @comments, user: @user, category: @category
     }
 
     respond_to do |format|
