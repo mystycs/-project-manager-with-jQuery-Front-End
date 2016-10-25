@@ -1,8 +1,13 @@
 class TasksController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  #before_action :authenticate_user!, only: [:create]
+  #skip_before_filter  :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, only: [:create]
+
 
   def create
-    @task = Task.new(comment_params)
+    @task = Task.new
+    @task.task = params[:task]
+  #  @task.category_id = params[:category_id]
     @task.project_id = params[:project_id]
     @task.completed = false
     if @task.save

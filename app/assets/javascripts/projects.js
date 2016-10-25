@@ -16,9 +16,7 @@ $(function() {
   $.getJSON( window.location.href + ".json",
     function(data) {
         content = '<h2>Project: ' + data.project.title + '</h2>';
-
         content += '<h3>Description: ' + data.project.description + '</h3>';
-
         content += '<h5>Project By: ' + data.user + '</h5>' ;
         $(content).appendTo("#project-content");
     });
@@ -28,5 +26,13 @@ function deleteProject() {
   $.ajax({
     url: window.location.href,
     type: 'DELETE'
+  });
+};
+
+function submitTask(task, categoryid, projectid) {
+  $.ajax({
+    type: "post",
+           url: "/tasks",
+           data: 'task=' + task + '&project_id=' + projectid + '&category_id=' + categoryid,
   });
 };

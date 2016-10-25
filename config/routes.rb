@@ -18,7 +18,7 @@ Rails.application.routes.draw do
 
   #resources :projects
   resources :comments
-  resources :tasks
+  #resources :tasks, :defaults => { :format => 'json' }
 
   resources :tasks do
     member do
