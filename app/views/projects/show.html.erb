@@ -1,9 +1,20 @@
-<h2>Project: <%= @project.title %></h2>
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "projects.js" %>
+<% end %>
+
+<div id="title">
+</div>
+<!-- <h2>Project: <%= @project.title %></h2> -->
 <% if current_user.present? && current_user.id == @project.user_id %>
   <%= link_to 'Delete Project', category_project_path(@category.id, @project.id), :method => :delete %>
 <% end %>
-<h3>Description: <%= @project.description %></h3>
-Posted By: <%= @user %><br><br>
+<div id="description">
+</div>
+<!-- <h3>Description: <%= @project.description %></h3> -->
+<div id="postedBy">
+</div><br>
+<!-- Posted By: <%= @user %><br><br> -->
+
 <h4>Tasks:</h4>
 <% @tasks.each_with_index do |task, index| %>
   <%= index+1 %>: <%= task.task %> <% if current_user.present? %> -
