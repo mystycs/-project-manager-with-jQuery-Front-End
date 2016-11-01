@@ -95,8 +95,7 @@ function Item(task, length, category_id) {
 };
 
 Item.prototype.renderLI = function() {
-  return '<br>' + (this.length) + ': ' + this.task + ' - <a href="#" onclick="markCompleted(' + this.id + ','
-   + this.category_id + ',' + this.project_id + ')">Mark Completed</a>' + '</br>';
+  return '<br>' + (this.length) + ': ' + this.task + ' - <a href="#" onclick="markCompleted(' + this.id + ',' + this.category_id + ',' + this.project_id + ')">Mark Completed</a>' + '</br>';
 };
 
 function submitTask(task, categoryid, projectid) {
