@@ -3,43 +3,17 @@
 <% end %>
 <div id="project-content">
 </div>
-<!-- <div id="title">
-</div> -->
-<!-- <h2>Project: <%= @project.title %></h2> -->
 <% if current_user.present? && current_user.id == @project.user_id %>
-  <!-- <%= link_to 'Delete Project', category_project_path(@category.id, @project.id), :method => :delete %> -->
   <%=   link_to 'Delete Project', '#', :onclick => 'deleteProject()' %>
 <% end %></br></br>
-<!-- <div id="description">
-</div> -->
-<!-- <h3>Description: <%= @project.description %></h3> -->
-<!-- <div id="postedBy">
-</div><br> -->
-<!-- Posted By: <%= @user %><br><br> -->
-
-<!-- test
-<%=   link_to 'test submit task', '#', :onclick => 'submitTask()' %>
-test -->
-
 
 <h4>Tasks:</h4>
-<!-- <% @tasks.each_with_index do |task, index| %>
-  <%= index+1 %>: <%= task.task %> <% if current_user.present? %> -
-    <% if task.completed != true %>
-      <%= link_to "Mark Completed", {:controller => "tasks", :action => "completed", :id => task.id, :category_id => @category.id, :project_id => @project.id} %>
-    <% else %>
-      <b>Completed</b>
-    <% end %>
-  <% end %>
-  <br><br>
-<% end %> -->
 
 <div id="showTasks">
 </div><br>
 
 <% if current_user.present? %>
 <h4> Add a Task: </h4>
-<!-- <%= render partial: 'tasks/form', locals: { task: @task } %> -->
 
 <input name="task" id="task" type="text" />
 <input name="buttonExecute" onclick="submitTask(document.getElementById('task').value, <%= @category.id %>, <%= @project.id %>)" type="button" value="Create Task" />
@@ -52,16 +26,6 @@ test -->
 <div id="showComments">
 </div><br>
 
-
-<!-- <% @comments.each_with_index do |comment, index| %>
-  <%= index+1 %>: <%= comment.comment %> - <%= comment.get_name_from_user_id(comment.user_id) %>
-
-  <%if current_user.present? && current_user.id == comment.user_id %>
-  <%= link_to 'Delete', comment_path(comment.id, :project_id => @project.id, :category_id => @category.id), :method => :delete %>
-  <% end %>
-
-<br><br>
-<% end %> -->
 <% if current_user.present? %>
 
 <h4>Add a Comment:</h4>
