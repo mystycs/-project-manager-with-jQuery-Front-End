@@ -1,17 +1,3 @@
-// $(function() {
-//   $.getJSON( window.location.href + ".json",
-//     function(data) {
-//         title = '<h2>Project: ' + data.project.title + '</h2>';
-//         $(title).appendTo("#title");
-//
-//         description = '<h3>Description: ' + data.project.description + '</h3>';
-//         $(description).appendTo("#description");
-//
-//         postedBy = '<h5>Project By: ' + data.user + '</h5>' ;
-//         $(postedBy).appendTo("#postedBy");
-//     });
-// });
-
 var documentready = function() {
 
   $(function() {
@@ -28,12 +14,20 @@ var documentready = function() {
 
           if (task.completed == false) {
             //  printTask = '<br>' + (i + 1) + ': ' + task.task + ' - <a href="/tasks/' + task.id + '/completed?category_id=' + data.category.id + '&amp;project_id=' + data.project.id + '">Mark Completed</a>' + '<br>';
-            printTask = '<br>' + (i + 1) + ': ' + task.task + '<a href="#" onclick="markCompleted(' + task.id + ',' + data.category.id + ',' + data.project.id + ')">Mark Completed</a>' + '<br>';
+            printTask = '<br>' + (i + 1) + ': ' + task.task + ' <a href="#" onclick="markCompleted(' + task.id + ',' + data.category.id + ',' + data.project.id + ')">Mark Completed</a>' + '<br>';
           } else {
             printTask = '<br>' + (i + 1) + ': ' + task.task + ' - <b>Completed</b>' + '<br>';
           }
 
           $(printTask).appendTo("#showTasks");
+
+        });
+
+        $.each(data.comments, function(j, comment) {
+
+          printComment = '<br>' + (j + 1) + ': ' + comment.comment + ' - ' + ' <a href="#" onclick="deleteComment(' + comment.id + ',' + data.category.id + ',' + data.project.id + ')">Delete</a>' + '<br>';
+
+          $(printComment).appendTo("#showComments");
 
         });
 
@@ -57,6 +51,20 @@ function loadTasks() {
           printTask = '<br>' + (i + 1) + ': ' + task.task + ' - <b>Completed</b>' + '<br>';
         }
         $(printTask).appendTo("#showTasks");
+
+      });
+    });
+};
+
+
+function loadComments() {
+  $.getJSON(window.location.href + ".json",
+    function(data) {
+      $.each(data.comments, function(j, comment) {
+
+        printComment = '<br>' + (j + 1) + ': ' + comment.comment + ' - ' + ' <a href="#" onclick="deleteComment(' + comment.id + ',' + data.category.id + ',' + data.project.id + ')">Delete</a>' + '<br>';
+
+        $(printComment).appendTo("#showComments");
 
       });
     });
@@ -86,6 +94,15 @@ function markCompleted(taskid, categoryid, projectid) {
 function deleteProject() {
   $.ajax({
     url: window.location.href,
+    type: 'DELETE'
+  });
+};
+
+function deleteComment(commentid, categoryid, projectid) {
+  var url = 'http://' + window.location.host + '/comments/' + commentid;
+  $.ajax({
+    url: url,
+    data: 'category_id=' + categoryid + '&project_id=' + projectid,
     type: 'DELETE'
   });
 };

@@ -47,8 +47,13 @@ test -->
 <% end %>
 
 <hr>
-<h4>Comments:</h4></br>
-<% @comments.each_with_index do |comment, index| %>
+<h4>Comments:</h4>
+
+<div id="showComments">
+</div><br>
+
+
+<!-- <% @comments.each_with_index do |comment, index| %>
   <%= index+1 %>: <%= comment.comment %> - <%= comment.get_name_from_user_id(comment.user_id) %>
 
   <%if current_user.present? && current_user.id == comment.user_id %>
@@ -56,7 +61,7 @@ test -->
   <% end %>
 
 <br><br>
-<% end %>
+<% end %> -->
 <% if current_user.present? %>
 
 <h4>Add a Comment:</h4>
