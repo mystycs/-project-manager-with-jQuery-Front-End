@@ -12,12 +12,14 @@ var documentready = function() {
 
         $.each(data.tasks, function(i, task) {
 
+
           if (task.completed == false) {
             //  printTask = '<br>' + (i + 1) + ': ' + task.task + ' - <a href="/tasks/' + task.id + '/completed?category_id=' + data.category.id + '&amp;project_id=' + data.project.id + '">Mark Completed</a>' + '<br>';
-            printTask = '<br>' + (i + 1) + ': ' + task.task + ' <a href="#" onclick="markCompleted(' + task.id + ',' + data.category.id + ',' + data.project.id + ')">Mark Completed</a>' + '<br>';
+            printTask = '<br>' + (i + 1) + ': ' + task.task + ' - <a href="#" onclick="markCompleted(' + task.id + ',' + data.category.id + ',' + data.project.id + ')">Mark Completed</a>' + '<br>';
           } else {
             printTask = '<br>' + (i + 1) + ': ' + task.task + ' - <b>Completed</b>' + '<br>';
           }
+
 
           $(printTask).appendTo("#showTasks");
 
@@ -36,6 +38,9 @@ var documentready = function() {
 
 }
 $(document).on('turbolinks:load', documentready);
+
+
+
 
 
 
@@ -107,6 +112,21 @@ function deleteComment(commentid, categoryid, projectid) {
   });
 };
 
+function Item(task, length, category_id) {
+  this.task = task.task;
+  this.id = task.id;
+  this.project_id = task.project_id;
+  this.length = length;
+  this.category_id = category_id;
+};
+
+
+Item.prototype.renderLI = function() {
+  return '<br>' + (this.length) + ': ' + this.task + ' - <a href="#" onclick="markCompleted(' + this.id + ',' + this.category_id + ',' + this.project_id + ')">Mark Completed</a>' + '</br>';
+};
+
+
+
 function submitTask(task, categoryid, projectid) {
   $.ajax({
     type: "post",
@@ -119,10 +139,16 @@ function submitTask(task, categoryid, projectid) {
 
       $.getJSON(window.location.href + ".json",
         function(data) {
-          lastTask = data.tasks.pop();
-          showLastTask = '<br>' + (data.tasks.length + 1) + ': ' + lastTask.task + ' - <a href="#" onclick="markCompleted(' + lastTask.id + ',' + data.category.id + ',' + data.project.id + ')">Mark Completed</a>' + '</br>';
+          // lastTask = data.tasks.pop();
+          // showLastTask = '<br>' + (data.tasks.length + 1) + ': ' + lastTask.task + ' - <a href="#" onclick="markCompleted(' + lastTask.id + ',' + data.category.id + ',' + data.project.id + ')">Mark Completed</a>' + '</br>';
+          // event.preventDefault();
+          // $(showLastTask).appendTo("#showTasks");
+
+          var task = data.tasks.pop();
+          var newTask = new Item(task, (data.tasks.length + 1), data.category.id);
+          var taskDisplay = newTask.renderLI();
           event.preventDefault();
-          $(showLastTask).appendTo("#showTasks");
+          $(taskDisplay).appendTo("#showTasks");
         });
     },
     error: function() {
