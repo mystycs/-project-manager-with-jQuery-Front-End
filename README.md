@@ -9,6 +9,7 @@ git clone git@github.com:mystycs/project-manager-with-jQuery-Front-End.git # or 
 cd project-manager-with-jQuery-Front-End
 bundle install
 rake db:migrate
+rails s
 ```
 
 ## Contribute
